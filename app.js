@@ -35,4 +35,22 @@ app.locals.title = 'Express - Generated with IronGenerator';
 const index = require('./routes/index.routes');
 app.use('/', index);
 
+// app.js
+// Mongoose configuration
+mongoose.Promise = Promise;
+mongoose
+  .connect('mongodb://localhost/basic-auth', {useMongoClient: true})
+  .then(() => {
+    console.log('Connected to Mongo!')
+  }).catch(err => {
+    console.error('Error connecting to mongo', err)
+  });
+
+// ...other code
+
+// Routes
+const router = require("./routes/auth-routes");
+app.use('/', router);
+
+
 module.exports = app;
